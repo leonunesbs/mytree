@@ -18,7 +18,9 @@ const Seo = ({
   const [metaDescription, setMetaDescription] = useState(
     initialMetaDescription || ""
   );
-  const [shareImage, setShareImage] = useState(initialMetaDescription || "");
+  const [shareImage, setShareImage] = useState(
+    initialMetaDescription || "/banner-light.png"
+  );
 
   useEffect(() => {
     if (initialMetaTitle) {
