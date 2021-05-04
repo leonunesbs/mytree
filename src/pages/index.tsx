@@ -58,7 +58,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
 
   return (
     <>
-      <Seo />
+      <Seo metaTitle="leonunesbs" />
       <Flex
         w="100vw"
         h="100vh"
