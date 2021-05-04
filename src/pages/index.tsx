@@ -86,7 +86,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
             src={logo}
             cursor="pointer"
             fit="contain"
-            maxW="30%"
+            maxW="35%"
             minW="120px"
             onClick={toggleColorMode}
           />
