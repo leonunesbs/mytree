@@ -21,6 +21,7 @@ import {
   AiOutlineWhatsApp,
 } from "react-icons/ai";
 import { IconType } from "react-icons";
+import DynamicFavicon from "@/components/DynamicFavicon";
 
 interface HomeProps {
   socials: {
@@ -32,12 +33,16 @@ interface HomeProps {
 }
 
 export default function Home({ socials: initialSocials }: HomeProps) {
-  const bgMainColor = useColorModeValue("brand.700", "brand.300");
+  const bgMainColor = useColorModeValue(
+    "linear(to-br, brand.700, brand.900)",
+    "linear(to-br, brand.300, brand.500)"
+  );
+
   const bgCardColor = useColorModeValue(
     "linear(to-b, brand.300, brand.400)",
     "linear(to-b, brand.700, brand.800)"
   );
-  const logo = useColorModeValue("/logo.png", "/logo2.png");
+  const logo = useColorModeValue("/logo-light.png", "/logo-dark.png");
   const socialIconsColor = useColorModeValue("brand.700", "brand.200");
   const socialBgColor = useColorModeValue("brand.200", "brand.300");
 
@@ -60,12 +65,13 @@ export default function Home({ socials: initialSocials }: HomeProps) {
   return (
     <>
       <Seo metaTitle="leonunesbs" />
+      <DynamicFavicon />
       <Flex
         w="100vw"
         h="100vh"
         align="center"
         justify="center"
-        bgColor={bgMainColor}
+        bgGradient={bgMainColor}
         px={[4, 60]}
         py={4}
       >

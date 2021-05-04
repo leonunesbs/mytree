@@ -1,8 +1,14 @@
+import { useColorModeValue, useTheme } from "@chakra-ui/system";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
 function DynamicFavicon() {
   const [colorMode, setColorMode] = useState("light");
+  const theme = useTheme();
+  const pwaThemeColor = useColorModeValue(
+    theme.colors.white,
+    theme.colors.brand[700]
+  );
   useEffect(() => {
     if (
       window.matchMedia &&
@@ -19,48 +25,8 @@ function DynamicFavicon() {
       {/* START favicon + PWA */}
       <link
         rel="apple-touch-icon"
-        sizes="57x57"
-        href={`/favicon/${colorMode}/apple-touch-icon-57x57.png`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="60x60"
-        href={`"/favicon/${colorMode}/apple-touch-icon-60x60.png"`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="72x72"
-        href={`"/favicon/${colorMode}/apple-touch-icon-72x72.png"`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="76x76"
-        href={`"/favicon/${colorMode}/apple-touch-icon-76x76.png"`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="114x114"
-        href={`/favicon/${colorMode}/apple-touch-icon-114x114.png`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="120x120"
-        href={`/favicon/${colorMode}/apple-touch-icon-120x120.png`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="144x144"
-        href={`/favicon/${colorMode}/apple-touch-icon-144x144.png`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="152x152"
-        href={`/favicon/${colorMode}/apple-touch-icon-152x152.png`}
-      />
-      <link
-        rel="apple-touch-icon"
         sizes="180x180"
-        href={`/favicon/${colorMode}/apple-touch-icon-180x180.png`}
+        href={`/favicon/${colorMode}/apple-touch-icon.png`}
       />
       <link
         rel="icon"
@@ -90,21 +56,21 @@ function DynamicFavicon() {
       <link
         rel="mask-icon"
         href={`/favicon/${colorMode}/safari-pinned-tab.svg`}
-        color="#1a202c"
+        color="#4a4d4d"
       />
       <link rel="shortcut icon" href={`/favicon/${colorMode}/favicon.ico`} />
-      <meta name="apple-mobile-web-app-title" content="leonunesbsBlog" />
-      <meta name="application-name" content="leonunesbsBlog" />
-      <meta name="msapplication-TileColor" content="#1a202c" />
+      <meta name="apple-mobile-web-app-title" content="myTree" />
+      <meta name="application-name" content="myTree" />
+      <meta name="msapplication-TileColor" content={pwaThemeColor} />
       <meta
         name="msapplication-TileImage"
-        content={`"/favicon/${colorMode}/mstile-144x144.png"`}
+        content={`/favicon/${colorMode}/mstile-144x144.png`}
       />
       <meta
         name="msapplication-config"
-        content={`"/favicon/${colorMode}/browserconfig.xml"`}
+        content={`/favicon/${colorMode}/browserconfig.xml`}
       />
-      <meta name="theme-color" content="#1a202c" />
+      <meta name="theme-color" content={pwaThemeColor} />
       {/* END favicon + PWA */}
     </Head>
   );

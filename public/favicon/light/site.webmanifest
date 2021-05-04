@@ -1,6 +1,6 @@
 {
-    "name": "leonunesbsBlog",
-    "short_name": "leonunesbsBlog",
+    "name": "myTree",
+    "short_name": "myTree",
     "icons": [
         {
             "src": "/favicon/light/android-chrome-36x36.png",
@@ -43,20 +43,15 @@
             "type": "image/png"
         },
         {
-            "src": "/favicon/light/android-chrome-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        },
-        {
             "src": "/favicon/light/safari-pinned-tab.svg",
             "sizes": "512x512",
             "type": "image/svg+xml",
             "purpose": "maskable" 
         }
     ],
-    "theme_color": "#f7fafc",
-    "background_color": "#f7fafc",
-    "start_url": "https://blog.leonunesbs.com.br",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "start_url": "https://tree.leonunesbs.com.br",
     "display": "standalone",
     "orientation": "portrait"
 }
