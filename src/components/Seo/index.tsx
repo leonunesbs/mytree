@@ -16,7 +16,7 @@ const Seo = ({
 
   const [metaTitle, setMetaTitle] = useState(siteName);
   const [metaDescription, setMetaDescription] = useState(
-    initialMetaDescription || ""
+    initialMetaDescription || "Acesso rápido aos meus links @leonunesbs."
   );
   const [shareImage, setShareImage] = useState(
     initialMetaDescription || "/banner-light.png"
