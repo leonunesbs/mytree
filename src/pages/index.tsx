@@ -39,6 +39,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
   );
   const logo = useColorModeValue("/logo.png", "/logo2.png");
   const socialIconsColor = useColorModeValue("brand.700", "brand.200");
+  const socialBgColor = useColorModeValue("brand.200", "brand.300");
 
   const { toggleColorMode } = useColorMode();
 
@@ -99,14 +100,14 @@ export default function Home({ socials: initialSocials }: HomeProps) {
                     key={social.id}
                     hasArrow
                     label={social.name}
-                    bg={bgMainColor}
+                    bg={socialBgColor}
                   >
                     <Link
                       isExternal
                       href={social.url}
                       p={1}
                       color={socialIconsColor}
-                      _hover={{ color: bgMainColor }}
+                      _hover={{ color: socialBgColor }}
                     >
                       <Icon id={social.name} as={social.icon} w={8} h={8} />
                     </Link>
