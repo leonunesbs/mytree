@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import React from "react";
-import NextLink from "next/link";
 
 import {
   AiFillFacebook,
@@ -33,9 +32,13 @@ interface HomeProps {
 }
 
 export default function Home({ socials: initialSocials }: HomeProps) {
-  const bgMain = useColorModeValue("brand.700", "brand.300");
-  const bgCard = useColorModeValue("brand.300", "brand.700");
+  const bgMainColor = useColorModeValue("brand.700", "brand.300");
+  const bgCardColor = useColorModeValue(
+    "linear(to-b, brand.300, brand.400)",
+    "linear(to-b, brand.700, brand.800)"
+  );
   const logo = useColorModeValue("/logo.png", "/logo2.png");
+  const socialIconsColor = useColorModeValue("brand.700", "brand.200");
 
   const { toggleColorMode } = useColorMode();
 
@@ -61,7 +64,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
         h="100vh"
         align="center"
         justify="center"
-        bgColor={bgMain}
+        bgColor={bgMainColor}
         px={[4, 60]}
         py={4}
       >
@@ -73,7 +76,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
           flexGrow={1}
           p={10}
           boxShadow="dark-lg"
-          bgColor={bgCard}
+          bgGradient={bgCardColor}
           borderRadius="2xl"
           align="center"
           // Temporary justify center
@@ -96,13 +99,14 @@ export default function Home({ socials: initialSocials }: HomeProps) {
                     key={social.id}
                     hasArrow
                     label={social.name}
-                    bg={bgMain}
+                    bg={bgMainColor}
                   >
                     <Link
                       isExternal
                       href={social.url}
                       p={1}
-                      _hover={{ color: bgMain }}
+                      color={socialIconsColor}
+                      _hover={{ color: bgMainColor }}
                     >
                       <Icon id={social.name} as={social.icon} w={8} h={8} />
                     </Link>
