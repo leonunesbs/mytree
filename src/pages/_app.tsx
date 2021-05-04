@@ -7,7 +7,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-33VJP2LVSZ"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
