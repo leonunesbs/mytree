@@ -1,67 +1,48 @@
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import {
+  Flex,
+  Heading,
+  Image,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import React from "react";
 
 export default function Home() {
+  const bgMain = useColorModeValue("brand.700", "brand.800");
+  const bgCard = useColorModeValue("brand.300", "brand.700");
+  const logo = useColorModeValue("/logo.png", "/logo2.png");
+
+  const { toggleColorMode } = useColorMode();
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{` `}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <p className={styles.description}>This is not an official starter!</p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=typescript-nextjs-starter"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=typescript-nextjs-starter"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{` `}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+    <Flex
+      w="100vw"
+      h="100vh"
+      align="center"
+      justify="center"
+      bgColor={bgMain}
+      px={[4, 60]}
+    >
+      <Flex
+        flexDir="column"
+        h="80%"
+        minW={["150px", "450px"]}
+        maxW="600px"
+        flexGrow={1}
+        p={10}
+        boxShadow="dark-lg"
+        bgColor={bgCard}
+        borderRadius="2xl"
+        align="center"
+      >
+        <Image
+          src={logo}
+          cursor="pointer"
+          fit="contain"
+          maxW="50%"
+          onClick={toggleColorMode}
+        />
+      </Flex>
+    </Flex>
   );
 }
