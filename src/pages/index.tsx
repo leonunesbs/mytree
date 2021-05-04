@@ -93,6 +93,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
         >
           <Image
             src={logo}
+            alt="logo"
             cursor="pointer"
             fit="contain"
             maxW="35%"
