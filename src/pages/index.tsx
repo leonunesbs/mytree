@@ -33,15 +33,17 @@ interface HomeProps {
 }
 
 export default function Home({ socials: initialSocials }: HomeProps) {
-  const bgMainColor = useColorModeValue(
+  const mainBgColor = useColorModeValue(
     "linear(to-br, brand.700, brand.900)",
     "linear(to-br, brand.300, brand.500)"
   );
 
-  const bgCardColor = useColorModeValue(
+  const cardBgColor = useColorModeValue(
     "linear(to-b, brand.300, brand.400)",
     "linear(to-b, brand.700, brand.800)"
   );
+  const toolTipBgColor = useColorModeValue("brand.200", "brand.400");
+  const toolTipTextColor = useColorModeValue("brand.700", "brand.200");
   const logo = useColorModeValue("/logo-light.png", "/logo-dark.png");
   const socialIconsColor = useColorModeValue("brand.700", "brand.200");
   const socialBgColor = useColorModeValue("brand.200", "brand.300");
@@ -71,7 +73,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
         h="100vh"
         align="center"
         justify="center"
-        bgGradient={bgMainColor}
+        bgGradient={mainBgColor}
         px={[4, 60]}
         py={4}
       >
@@ -83,7 +85,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
           flexGrow={1}
           p={10}
           boxShadow="dark-lg"
-          bgGradient={bgCardColor}
+          bgGradient={cardBgColor}
           borderRadius="2xl"
           align="center"
           // Temporary justify center
@@ -105,8 +107,10 @@ export default function Home({ socials: initialSocials }: HomeProps) {
                   <Tooltip
                     key={social.id}
                     hasArrow
+                    fontWeight="bold"
                     label={social.name}
-                    bg={socialBgColor}
+                    bg={toolTipBgColor}
+                    color={toolTipTextColor}
                   >
                     <Link
                       isExternal
