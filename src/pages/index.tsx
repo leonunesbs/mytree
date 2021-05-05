@@ -1,13 +1,23 @@
 import Seo from "@/components/Seo";
 import {
+  AspectRatio,
   Flex,
+  Heading,
+  Text,
   Icon,
   Image,
   Link,
+  SimpleGrid,
   Stack,
   Tooltip,
   useColorMode,
   useColorModeValue,
+  Wrap,
+  WrapItem,
+  useDisclosure,
+  Collapse,
+  Img,
+  SlideFade,
 } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import React from "react";
@@ -20,6 +30,7 @@ import {
   AiFillTwitterSquare,
   AiOutlineWhatsApp,
 } from "react-icons/ai";
+import { FaTwitch } from "react-icons/fa";
 import { IconType } from "react-icons";
 import DynamicFavicon from "@/components/DynamicFavicon";
 
@@ -31,6 +42,50 @@ interface HomeProps {
     icon: IconType;
   }[];
 }
+
+const Card = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  return (
+    <>
+      <Flex
+        bgColor="brand.200"
+        color="brand.700"
+        minH="75px"
+        w="100%"
+        borderRadius="md"
+        align="center"
+        justify="center"
+        onMouseEnter={onOpen}
+        onMouseLeave={onClose}
+        flexDir="column"
+        boxShadow="md"
+      >
+        <SlideFade in={!isOpen} offsetY="20px">
+          <Heading as="h2" size="md" display={isOpen ? "none" : "initial"}>
+            leonunesbsBlog
+          </Heading>
+        </SlideFade>
+        <Collapse in={isOpen} animateOpacity>
+          <SlideFade in={isOpen} offsetY="-2000px">
+            <Flex flexDir="column" minH="155px" align="center" p={10}>
+              <Img src="/leonunesbsBlog-logo.png" boxSize="150px" />
+              <Wrap>
+                <WrapItem>
+                  <Icon />
+                  <Icon />
+                  <Icon />
+                  <Icon />
+                  <Icon />
+                  <Icon />
+                </WrapItem>
+              </Wrap>
+            </Flex>
+          </SlideFade>
+        </Collapse>
+      </Flex>
+    </>
+  );
+};
 
 export default function Home({ socials: initialSocials }: HomeProps) {
   const mainBgColor = useColorModeValue(
@@ -57,6 +112,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
     github: AiFillGithub,
     linkedin: AiFillLinkedin,
     whatsapp: AiOutlineWhatsApp,
+    twitch: FaTwitch,
   };
 
   const socials = initialSocials.map((social) => ({
@@ -74,58 +130,66 @@ export default function Home({ socials: initialSocials }: HomeProps) {
         align="center"
         justify="center"
         bgGradient={mainBgColor}
-        px={[4, 60]}
-        py={4}
+        p={2}
       >
         <Flex
           flexDir="column"
           h="100%"
-          minW={["150px", "450px"]}
-          maxW="600px"
+          maxW="500px"
           flexGrow={1}
-          p={10}
           boxShadow="dark-lg"
           bgGradient={cardBgColor}
           borderRadius="2xl"
           align="center"
-          // Temporary justify center
-          justify="center"
+          justify="space-between"
+          px={[2, 4]}
+          py={4}
         >
-          <Image
-            src={logo}
-            alt="logo"
-            cursor="pointer"
-            fit="contain"
-            maxW="35%"
-            minW="120px"
-            onClick={toggleColorMode}
-          />
+          <Stack flexGrow={1} justify="center" w="100%">
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+          </Stack>
           <Flex flexDir="column" align="center">
-            <Flex h="px" my={2} w="95%" bgColor="brand.200" />
-            <Stack isInline spacing={4} justify="center">
-              {socials.map((social) => {
-                return (
-                  <Tooltip
-                    key={social.id}
-                    hasArrow
-                    fontWeight="bold"
-                    label={social.name}
-                    bg={toolTipBgColor}
-                    color={toolTipTextColor}
-                  >
-                    <Link
-                      isExternal
-                      href={social.url}
-                      p={1}
-                      color={socialIconsColor}
-                      _hover={{ color: socialBgColor }}
-                    >
-                      <Icon id={social.name} as={social.icon} w={8} h={8} />
-                    </Link>
-                  </Tooltip>
-                );
-              })}
-            </Stack>
+            <Image
+              src={logo}
+              alt="logo"
+              cursor="pointer"
+              fit="contain"
+              maxW="35%"
+              minW="100px"
+              onClick={toggleColorMode}
+            />
+            <Flex flexDir="column" align="center">
+              <Flex h="px" my={2} w="95%" bgColor="brand.200" />
+              <Wrap spacing={4} justify="center">
+                {socials.map((social) => {
+                  return (
+                    <WrapItem>
+                      <Tooltip
+                        key={social.id}
+                        hasArrow
+                        fontWeight="bold"
+                        label={social.name}
+                        bg={toolTipBgColor}
+                        color={toolTipTextColor}
+                      >
+                        <Link
+                          isExternal
+                          href={social.url}
+                          p={1}
+                          color={socialIconsColor}
+                          _hover={{ color: socialBgColor }}
+                        >
+                          <Icon id={social.name} as={social.icon} w={8} h={8} />
+                        </Link>
+                      </Tooltip>
+                    </WrapItem>
+                  );
+                })}
+              </Wrap>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
