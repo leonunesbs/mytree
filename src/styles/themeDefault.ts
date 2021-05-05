@@ -15,7 +15,7 @@ const themeRed: ThemeOverride = {
     },
   },
   config: {
-    initialColorMode: "light",
+    initialColorMode: "dark",
     useSystemColorMode: false,
   },
   fonts: {
