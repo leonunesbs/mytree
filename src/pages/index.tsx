@@ -124,16 +124,16 @@ const Card = ({ title, image, link, cardBgColor, mainBgColor }: any) => {
                         display="flex"
                         _focus={{}}
                         w={200}
-                        bgGradient={cardBgColor}
+                        bgColor="brand.700"
                         boxShadow="lg"
                       >
-                        <PopoverArrow bgColor="brand.400" />
+                        <PopoverArrow bgColor="brand.300" />
                         <PopoverBody display="flex" justifyContent="center">
                           <QRCode
                             size={200}
                             value={link}
                             renderAs="svg"
-                            bgColor={theme.colors.gray[700]}
+                            bgColor="transparent"
                             fgColor={theme.colors.brand[300]}
                           />
                         </PopoverBody>
