@@ -61,7 +61,7 @@ interface HomeProps {
 
 const Card = ({ title, image, link, cardBgColor, mainBgColor }: any) => {
   const theme = useTheme();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onToggle, onClose } = useDisclosure();
   const cardRef = useRef<HTMLDivElement>(null);
   useOutsideClick({
     ref: cardRef,
@@ -78,7 +78,7 @@ const Card = ({ title, image, link, cardBgColor, mainBgColor }: any) => {
       borderRadius="md"
       align="center"
       justify="center"
-      onClick={onOpen}
+      onClick={onToggle}
       flexDir="column"
       boxShadow="md"
       p={4}
