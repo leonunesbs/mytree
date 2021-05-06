@@ -18,9 +18,11 @@ import {
   Collapse,
   Img,
   SlideFade,
+  useOutsideClick,
+  LinkBox,
 } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
-import React from "react";
+import React, { useRef } from "react";
 
 import {
   AiFillFacebook,
@@ -31,8 +33,10 @@ import {
   AiOutlineWhatsApp,
 } from "react-icons/ai";
 import { FaTwitch } from "react-icons/fa";
+import { FiExternalLink } from "react-icons/fi";
 import { IconType } from "react-icons";
 import DynamicFavicon from "@/components/DynamicFavicon";
+import Head from "next/head";
 
 interface HomeProps {
   socials: {
@@ -43,47 +47,59 @@ interface HomeProps {
   }[];
 }
 
-const Card = () => {
+const Card = ({ title, image, link }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const cardRef = useRef<HTMLDivElement>(null);
+  useOutsideClick({
+    ref: cardRef,
+    handler: () => onClose(),
+  });
   return (
-    <>
-      <Flex
-        bgColor="brand.200"
-        color="brand.700"
-        minH="75px"
-        w="100%"
-        borderRadius="md"
-        align="center"
-        justify="center"
-        onMouseEnter={onOpen}
-        onMouseLeave={onClose}
-        flexDir="column"
-        boxShadow="md"
-      >
-        <SlideFade in={!isOpen} offsetY="20px">
-          <Heading as="h2" size="md" display={isOpen ? "none" : "initial"}>
-            leonunesbsBlog
-          </Heading>
-        </SlideFade>
-        <Collapse in={isOpen} animateOpacity>
-          <SlideFade in={isOpen} offsetY="-2000px">
-            <Flex flexDir="column" minH="155px" align="center" p={10}>
-              <Img src="/leonunesbsBlog-logo.png" boxSize="150px" />
-              <Wrap>
+    <Flex
+      ref={cardRef}
+      bgColor="brand.200"
+      color="brand.700"
+      minH="65px"
+      w="100%"
+      borderRadius="md"
+      align="center"
+      justify="center"
+      onClick={onOpen}
+      flexDir="column"
+      boxShadow="md"
+    >
+      <Text as="h2" fontWeight="bold" fontSize="xl">
+        {title}
+      </Text>
+      <Collapse in={isOpen} animateOpacity>
+        <SlideFade in={isOpen} offsetY="-2000px">
+          <Stack
+            flexDir="column"
+            minH="155px"
+            align="center"
+            justify="center"
+            p={10}
+            w="100%"
+          >
+            <Flex flexDir="column" w="100%" align="center">
+              {image && (
+                <>
+                  <Img src={image} boxSize="100px" objectFit="contain" />
+                  <Flex h="px" my={2} w="100%" bgColor="brand.700" />
+                </>
+              )}
+              <Wrap spacing={4} justify="center">
                 <WrapItem>
-                  <Icon />
-                  <Icon />
-                  <Icon />
-                  <Icon />
-                  <Icon />
-                  <Icon />
+                  <Link href={link} isExternal>
+                    <Icon as={FiExternalLink} h={10} w={10} />
+                  </Link>
                 </WrapItem>
               </Wrap>
             </Flex>
-          </SlideFade>
-        </Collapse>
-      </Flex>
-    </>
+          </Stack>
+        </SlideFade>
+      </Collapse>
+    </Flex>
   );
 };
 
@@ -146,10 +162,15 @@ export default function Home({ socials: initialSocials }: HomeProps) {
           py={4}
         >
           <Stack flexGrow={1} justify="center" w="100%">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            <Card
+              title="meu blog"
+              image="/leonunesbsBlog-logo.png"
+              link="https://blog.leonunesbs.com.br"
+            />
+            <Card
+              title="portfólio"
+              link="https://portfolio.leonunesbs.com.br"
+            />
           </Stack>
           <Flex flexDir="column" align="center">
             <Image
