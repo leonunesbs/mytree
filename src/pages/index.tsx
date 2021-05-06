@@ -208,7 +208,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
           px={[2, 4]}
           py={4}
         >
-          <Heading as="h1" textAlign="center" bgHeading={mainBgColor}>
+          <Heading as="h1" textAlign="center" bgGradient={mainBgColor}>
             @leonunesbs
           </Heading>
           <Stack flexGrow={1} justify="center" w="100%">
