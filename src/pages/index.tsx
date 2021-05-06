@@ -155,7 +155,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
     "linear(to-br, brand.700, brand.900)",
     "linear(to-br, brand.300, brand.500)"
   );
-
+  
   const cardBgColor = useColorModeValue(
     "linear(to-b, brand.300, brand.400)",
     "linear(to-b, brand.700, brand.800)"
@@ -208,6 +208,9 @@ export default function Home({ socials: initialSocials }: HomeProps) {
           px={[2, 4]}
           py={4}
         >
+          <Heading as="h1" textAlign="center" bgHeading={mainBgColor}>
+            @leonunesbs
+          </Heading>
           <Stack flexGrow={1} justify="center" w="100%">
             <Card
               title="Meu blog"
