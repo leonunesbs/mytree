@@ -29,6 +29,7 @@ import {
   PopoverHeader,
   PopoverTrigger,
   Portal,
+  useTheme,
 } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import React, { useRef } from "react";
@@ -59,6 +60,7 @@ interface HomeProps {
 }
 
 const Card = ({ title, image, link, cardBgColor, mainBgColor }: any) => {
+  const theme = useTheme();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cardRef = useRef<HTMLDivElement>(null);
   useOutsideClick({
@@ -122,7 +124,6 @@ const Card = ({ title, image, link, cardBgColor, mainBgColor }: any) => {
                         display="flex"
                         _focus={{}}
                         w={200}
-                        color="brand.200"
                         bgGradient={cardBgColor}
                         boxShadow="lg"
                       >
@@ -132,8 +133,8 @@ const Card = ({ title, image, link, cardBgColor, mainBgColor }: any) => {
                             size={200}
                             value={link}
                             renderAs="svg"
-                            bgColor="transparent"
-                            fgColor="#FFFFFF"
+                            bgColor={theme.colors.gray[700]}
+                            fgColor={theme.colors.brand[300]}
                           />
                         </PopoverBody>
                       </PopoverContent>
