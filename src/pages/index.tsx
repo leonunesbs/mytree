@@ -208,7 +208,15 @@ export default function Home({ socials: initialSocials }: HomeProps) {
           px={[2, 4]}
           py={4}
         >
-          <Text as="h1" textAlign="center" bgGradient={mainBgColor} bgClip="text" fontFamily="Oswald">
+          <Text 
+            as="h1" 
+            textAlign="center" 
+            bgGradient={mainBgColor} 
+            bgClip="text" 
+            fontFamily="Oswald" 
+            fontWeight="bold" 
+            fontSize="xl"
+          >
             @leonunesbs
           </Text>
           <Stack flexGrow={1} justify="center" w="100%">
