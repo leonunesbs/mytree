@@ -208,9 +208,9 @@ export default function Home({ socials: initialSocials }: HomeProps) {
           px={[2, 4]}
           py={4}
         >
-          <Heading as="h1" textAlign="center" bgGradient={mainBgColor} bgClip="text">
+          <Text as="h1" textAlign="center" bgGradient={mainBgColor} bgClip="text" fontFamily="Oswald">
             @leonunesbs
-          </Heading>
+          </Text>
           <Stack flexGrow={1} justify="center" w="100%">
             <Card
               title="Meu blog"
