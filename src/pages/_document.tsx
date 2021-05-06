@@ -24,7 +24,6 @@ export default class MyDocument extends Document {
           `,
             }}
           />
-        <Head>
           <link rel="canonical" href="https://mytree.leonunesbs.com.br" />
         </Head>
         <body>
