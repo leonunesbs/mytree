@@ -1,16 +1,28 @@
 import Seo from "@/components/Seo";
 import {
+  AspectRatio,
   Flex,
+  Heading,
+  Text,
   Icon,
   Image,
   Link,
+  SimpleGrid,
   Stack,
   Tooltip,
   useColorMode,
   useColorModeValue,
+  Wrap,
+  WrapItem,
+  useDisclosure,
+  Collapse,
+  Img,
+  SlideFade,
+  useOutsideClick,
+  LinkBox,
 } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
-import React from "react";
+import React, { useRef } from "react";
 
 import {
   AiFillFacebook,
@@ -20,8 +32,11 @@ import {
   AiFillTwitterSquare,
   AiOutlineWhatsApp,
 } from "react-icons/ai";
+import { FaTwitch } from "react-icons/fa";
+import { FiExternalLink } from "react-icons/fi";
 import { IconType } from "react-icons";
 import DynamicFavicon from "@/components/DynamicFavicon";
+import Head from "next/head";
 
 interface HomeProps {
   socials: {
@@ -31,6 +46,62 @@ interface HomeProps {
     icon: IconType;
   }[];
 }
+
+const Card = ({ title, image, link }: any) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cardRef = useRef<HTMLDivElement>(null);
+  useOutsideClick({
+    ref: cardRef,
+    handler: () => onClose(),
+  });
+  return (
+    <Flex
+      ref={cardRef}
+      bgColor="brand.200"
+      color="brand.700"
+      minH="65px"
+      w="100%"
+      borderRadius="md"
+      align="center"
+      justify="center"
+      onClick={onOpen}
+      flexDir="column"
+      boxShadow="md"
+    >
+      <Text as="h2" fontWeight="bold" fontSize="xl">
+        {title}
+      </Text>
+      <Collapse in={isOpen} animateOpacity>
+        <SlideFade in={isOpen} offsetY="-2000px">
+          <Stack
+            flexDir="column"
+            minH="155px"
+            align="center"
+            justify="center"
+            p={10}
+            w="100%"
+          >
+            <Flex flexDir="column" w="100%" align="center">
+              {image && (
+                <>
+                  <Img src={image} boxSize="100px" objectFit="contain" />
+                  <Flex h="px" my={2} w="100%" bgColor="brand.700" />
+                </>
+              )}
+              <Wrap spacing={4} justify="center">
+                <WrapItem>
+                  <Link href={link} isExternal>
+                    <Icon as={FiExternalLink} h={10} w={10} />
+                  </Link>
+                </WrapItem>
+              </Wrap>
+            </Flex>
+          </Stack>
+        </SlideFade>
+      </Collapse>
+    </Flex>
+  );
+};
 
 export default function Home({ socials: initialSocials }: HomeProps) {
   const mainBgColor = useColorModeValue(
@@ -57,6 +128,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
     github: AiFillGithub,
     linkedin: AiFillLinkedin,
     whatsapp: AiOutlineWhatsApp,
+    twitch: FaTwitch,
   };
 
   const socials = initialSocials.map((social) => ({
@@ -74,58 +146,71 @@ export default function Home({ socials: initialSocials }: HomeProps) {
         align="center"
         justify="center"
         bgGradient={mainBgColor}
-        px={[4, 60]}
-        py={4}
+        p={2}
       >
         <Flex
           flexDir="column"
           h="100%"
-          minW={["150px", "450px"]}
-          maxW="600px"
+          maxW="500px"
           flexGrow={1}
-          p={10}
           boxShadow="dark-lg"
           bgGradient={cardBgColor}
           borderRadius="2xl"
           align="center"
-          // Temporary justify center
-          justify="center"
+          justify="space-between"
+          px={[2, 4]}
+          py={4}
         >
-          <Image
-            src={logo}
-            alt="logo"
-            cursor="pointer"
-            fit="contain"
-            maxW="35%"
-            minW="120px"
-            onClick={toggleColorMode}
-          />
+          <Stack flexGrow={1} justify="center" w="100%">
+            <Card
+              title="meu blog"
+              image="/leonunesbsBlog-logo.png"
+              link="https://blog.leonunesbs.com.br"
+            />
+            <Card
+              title="portfólio"
+              link="https://portfolio.leonunesbs.com.br"
+            />
+          </Stack>
           <Flex flexDir="column" align="center">
-            <Flex h="px" my={2} w="95%" bgColor="brand.200" />
-            <Stack isInline spacing={4} justify="center">
-              {socials.map((social) => {
-                return (
-                  <Tooltip
-                    key={social.id}
-                    hasArrow
-                    fontWeight="bold"
-                    label={social.name}
-                    bg={toolTipBgColor}
-                    color={toolTipTextColor}
-                  >
-                    <Link
-                      isExternal
-                      href={social.url}
-                      p={1}
-                      color={socialIconsColor}
-                      _hover={{ color: socialBgColor }}
-                    >
-                      <Icon id={social.name} as={social.icon} w={8} h={8} />
-                    </Link>
-                  </Tooltip>
-                );
-              })}
-            </Stack>
+            <Image
+              src={logo}
+              alt="logo"
+              cursor="pointer"
+              fit="contain"
+              maxW="35%"
+              minW="100px"
+              onClick={toggleColorMode}
+            />
+            <Flex flexDir="column" align="center">
+              <Flex h="px" my={2} w="95%" bgColor="brand.200" />
+              <Wrap spacing={4} justify="center">
+                {socials.map((social) => {
+                  return (
+                    <WrapItem>
+                      <Tooltip
+                        key={social.id}
+                        hasArrow
+                        fontWeight="bold"
+                        label={social.name}
+                        bg={toolTipBgColor}
+                        color={toolTipTextColor}
+                      >
+                        <Link
+                          isExternal
+                          href={social.url}
+                          p={1}
+                          color={socialIconsColor}
+                          _hover={{ color: socialBgColor }}
+                        >
+                          <Icon id={social.name} as={social.icon} w={8} h={8} />
+                        </Link>
+                      </Tooltip>
+                    </WrapItem>
+                  );
+                })}
+              </Wrap>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
