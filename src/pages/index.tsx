@@ -30,6 +30,13 @@ import {
   PopoverTrigger,
   Portal,
   useTheme,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogBody,
+  AlertDialogCloseButton,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
 } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import React, { useRef } from "react";
@@ -67,6 +74,9 @@ const Card = ({ title, image, link, cardBgColor, mainBgColor }: any) => {
     ref: cardRef,
     handler: () => onClose(),
   });
+
+  const qrCodeAlert = useDisclosure();
+  const cancelRef = useRef(null);
 
   return (
     <Flex
@@ -113,22 +123,22 @@ const Card = ({ title, image, link, cardBgColor, mainBgColor }: any) => {
                 </WrapItem>
                 <WrapItem>
                   <Link href={link} isExternal></Link>
-                  <Popover>
-                    <PopoverTrigger>
-                      <Button _focus={{}} p={0}>
-                        <Icon as={AiOutlineQrcode} h={10} w={10} />
-                      </Button>
-                    </PopoverTrigger>
-                    <Portal>
-                      <PopoverContent
-                        display="flex"
-                        _focus={{}}
-                        w={200}
-                        bgColor="brand.700"
-                        boxShadow="lg"
-                      >
-                        <PopoverArrow bgColor="brand.300" />
-                        <PopoverBody display="flex" justifyContent="center">
+                  <Button _focus={{}} p={0} onClick={qrCodeAlert.onOpen}>
+                    <Icon as={AiOutlineQrcode} h={10} w={10} />
+                  </Button>
+                  <AlertDialog
+                    motionPreset="slideInBottom"
+                    leastDestructiveRef={cancelRef}
+                    onClose={qrCodeAlert.onClose}
+                    isOpen={qrCodeAlert.isOpen}
+                    size="sm"
+                    isCentered
+                  >
+                    <AlertDialogOverlay />
+                    <AlertDialogContent bgColor="brand.700">
+                      <AlertDialogCloseButton />
+                      <AlertDialogBody>
+                        <Flex justify="center">
                           <QRCode
                             size={200}
                             value={link}
@@ -136,10 +146,10 @@ const Card = ({ title, image, link, cardBgColor, mainBgColor }: any) => {
                             bgColor="transparent"
                             fgColor={theme.colors.brand[300]}
                           />
-                        </PopoverBody>
-                      </PopoverContent>
-                    </Portal>
-                  </Popover>
+                        </Flex>
+                      </AlertDialogBody>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </WrapItem>
               </Wrap>
             </Flex>
@@ -155,7 +165,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
     "linear(to-br, brand.700, brand.900)",
     "linear(to-br, brand.300, brand.500)"
   );
-  
+
   const cardBgColor = useColorModeValue(
     "linear(to-b, brand.300, brand.400)",
     "linear(to-b, brand.700, brand.800)"
@@ -208,14 +218,14 @@ export default function Home({ socials: initialSocials }: HomeProps) {
           px={[2, 4]}
           py={4}
         >
-          <Text 
-            as="h1" 
-            textAlign="center" 
-            bgGradient={mainBgColor} 
-            bgClip="text" 
-            fontFamily="Oswald" 
-            fontWeight="bold" 
-            fontSize="xl"
+          <Text
+            as="h1"
+            textAlign="center"
+            bgGradient={mainBgColor}
+            bgClip="text"
+            fontFamily="Oswald"
+            fontWeight="bold"
+            fontSize="2xl"
           >
             @leonunesbs
           </Text>
