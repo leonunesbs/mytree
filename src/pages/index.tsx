@@ -95,7 +95,7 @@ const Card = ({ title, image, link, cardBgColor, mainBgColor }: any) => {
     >
       {image && (
         <>
-          <Img src={image} boxSize="100px" objectFit="contain" />
+          <Img src={image} boxSize="100px" objectFit="contain" alt="title" />
         </>
       )}
 
@@ -270,6 +270,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
                       >
                         <Link
                           isExternal
+                          name={social.name}
                           href={social.url}
                           p={1}
                           color={socialIconsColor}
