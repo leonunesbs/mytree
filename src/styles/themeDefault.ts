@@ -20,7 +20,7 @@ const themeRed: ThemeOverride = {
   },
   fonts: {
     heading: "Oswald, sans-serif",
-    body: "JetBrains Mono, monospace",
+    body: "Balsanmiq Sans, sans-serif",
   },
   styles: {
     global: {

@@ -20,6 +20,15 @@ import {
   SlideFade,
   useOutsideClick,
   LinkBox,
+  Button,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+  Portal,
 } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import React, { useRef } from "react";
@@ -30,6 +39,7 @@ import {
   AiFillInstagram,
   AiFillLinkedin,
   AiFillTwitterSquare,
+  AiOutlineQrcode,
   AiOutlineWhatsApp,
 } from "react-icons/ai";
 import { FaTwitch } from "react-icons/fa";
@@ -37,6 +47,7 @@ import { FiExternalLink } from "react-icons/fi";
 import { IconType } from "react-icons";
 import DynamicFavicon from "@/components/DynamicFavicon";
 import Head from "next/head";
+import QRCode from "qrcode.react";
 
 interface HomeProps {
   socials: {
@@ -47,13 +58,14 @@ interface HomeProps {
   }[];
 }
 
-const Card = ({ title, image, link }: any) => {
+const Card = ({ title, image, link, cardBgColor, mainBgColor }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cardRef = useRef<HTMLDivElement>(null);
   useOutsideClick({
     ref: cardRef,
     handler: () => onClose(),
   });
+
   return (
     <Flex
       ref={cardRef}
@@ -67,10 +79,14 @@ const Card = ({ title, image, link }: any) => {
       onClick={onOpen}
       flexDir="column"
       boxShadow="md"
+      p={4}
     >
-      <Text as="h2" fontWeight="bold" fontSize="xl">
-        {title}
-      </Text>
+      {image && (
+        <>
+          <Img src={image} boxSize="100px" objectFit="contain" />
+        </>
+      )}
+
       <Collapse in={isOpen} animateOpacity>
         <SlideFade in={isOpen} offsetY="-2000px">
           <Stack
@@ -82,17 +98,47 @@ const Card = ({ title, image, link }: any) => {
             w="100%"
           >
             <Flex flexDir="column" w="100%" align="center">
-              {image && (
-                <>
-                  <Img src={image} boxSize="100px" objectFit="contain" />
-                  <Flex h="px" my={2} w="100%" bgColor="brand.700" />
-                </>
-              )}
+              <Heading as="h2" fontSize="xl">
+                {title}
+              </Heading>
+              <Flex h="px" my={2} w="100%" bgColor="brand.700" />
+
               <Wrap spacing={4} justify="center">
                 <WrapItem>
                   <Link href={link} isExternal>
                     <Icon as={FiExternalLink} h={10} w={10} />
                   </Link>
+                </WrapItem>
+                <WrapItem>
+                  <Link href={link} isExternal></Link>
+                  <Popover>
+                    <PopoverTrigger>
+                      <Button _focus={{}} p={0}>
+                        <Icon as={AiOutlineQrcode} h={10} w={10} />
+                      </Button>
+                    </PopoverTrigger>
+                    <Portal>
+                      <PopoverContent
+                        display="flex"
+                        _focus={{}}
+                        w={200}
+                        color="brand.200"
+                        bgGradient={cardBgColor}
+                        boxShadow="lg"
+                      >
+                        <PopoverArrow bgColor="brand.400" />
+                        <PopoverBody display="flex" justifyContent="center">
+                          <QRCode
+                            size={200}
+                            value={link}
+                            renderAs="svg"
+                            bgColor="transparent"
+                            fgColor="#FFFFFF"
+                          />
+                        </PopoverBody>
+                      </PopoverContent>
+                    </Portal>
+                  </Popover>
                 </WrapItem>
               </Wrap>
             </Flex>
@@ -163,13 +209,18 @@ export default function Home({ socials: initialSocials }: HomeProps) {
         >
           <Stack flexGrow={1} justify="center" w="100%">
             <Card
-              title="meu blog"
+              title="Meu blog"
               image="/leonunesbsBlog-logo.png"
               link="https://blog.leonunesbs.com.br"
+              cardBgColor={cardBgColor}
+              mainBgColor={mainBgColor}
             />
             <Card
-              title="portfólio"
+              title="Portfólio"
+              image="/portfolio.png"
               link="https://portfolio.leonunesbs.com.br"
+              cardBgColor={cardBgColor}
+              mainBgColor={mainBgColor}
             />
           </Stack>
           <Flex flexDir="column" align="center">
@@ -187,9 +238,8 @@ export default function Home({ socials: initialSocials }: HomeProps) {
               <Wrap spacing={4} justify="center">
                 {socials.map((social) => {
                   return (
-                    <WrapItem>
+                    <WrapItem key={social.id}>
                       <Tooltip
-                        key={social.id}
                         hasArrow
                         fontWeight="bold"
                         label={social.name}
