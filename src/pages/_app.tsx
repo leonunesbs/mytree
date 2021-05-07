@@ -2,9 +2,11 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 import themeDefault from "@/styles/themeDefault";
 import { useRouter } from "next/router";
-import Head from "next/head";
 import { useEffect } from "react";
 import * as gtag from "../utils/gtag";
+
+import "@fontsource/balsamiq-sans";
+import "@fontsource/oswald";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();

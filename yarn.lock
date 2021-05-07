@@ -1698,6 +1698,16 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/balsamiq-sans@^4.2.2":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/balsamiq-sans/-/balsamiq-sans-4.2.2.tgz#fa1e7dcedcbfad6374f18248cb539b2e9c5985b0"
+  integrity sha512-ewFz7W7M+tE+/TeZEelKKMZ01N9DWIdEFuZqd84skK2aigE2uFhzuFFCYSHCkyVBr1PBqcWzecgBzCPEMWuvhg==
+
+"@fontsource/oswald@^4.2.2":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-4.2.2.tgz#2d57109b9c40fb7b7be8e988c997480e3b784323"
+  integrity sha512-QQ7U3gPZLezZz5zwZOuhfDKX4bgpkO98iGTatElZ2HRRA20y2Kk4qZmAh4nXnJnt3KJPzAYktNeDpZIT7H/4tQ==
+
 "@hapi/accept@5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.1.tgz#068553e867f0f63225a506ed74e899441af53e10"
