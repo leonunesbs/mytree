@@ -20,6 +20,7 @@ import {
   SlideFade,
   useOutsideClick,
   LinkBox,
+  LinkOverlay,
   Button,
   Popover,
   PopoverArrow,
