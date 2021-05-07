@@ -261,24 +261,26 @@ export default function Home({ socials: initialSocials }: HomeProps) {
                 {socials.map((social) => {
                   return (
                     <WrapItem key={social.id}>
-                      <Tooltip
-                        hasArrow
-                        fontWeight="bold"
-                        label={social.name}
-                        bg={toolTipBgColor}
-                        color={toolTipTextColor}
-                      >
-                        <Link
-                          isExternal
-                          name={social.name}
-                          href={social.url}
-                          p={1}
-                          color={socialIconsColor}
-                          _hover={{ color: socialBgColor }}
+                      <LinkBox>
+                        <Tooltip
+                          hasArrow
+                          fontWeight="bold"
+                          label={social.name}
+                          bg={toolTipBgColor}
+                          color={toolTipTextColor}
                         >
-                          <Icon id={social.name} as={social.icon} w={8} h={8} />
-                        </Link>
-                      </Tooltip>
+                          <LinkOverlay
+                            isExternal
+                            name={social.name}
+                            href={social.url}
+                            p={1}
+                            color={socialIconsColor}
+                            _hover={{ color: socialBgColor }}
+                          >
+                            <Icon as={social.icon} w={8} h={8} />
+                          </LinkOverlay>
+                        </Tooltip>
+                      </LinkBox>
                     </WrapItem>
                   );
                 })}
