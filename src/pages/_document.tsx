@@ -5,7 +5,7 @@ import { GA_TRACKING_ID } from "../utils/gtag";
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html lang="pt-BR">
         <Head>
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
