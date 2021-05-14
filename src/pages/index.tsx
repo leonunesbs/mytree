@@ -59,7 +59,7 @@ import Head from "next/head";
 import QRCode from "qrcode.react";
 
 interface HomeProps {
-  socials: {
+  social: {
     id: number;
     name: string;
     url: string;
@@ -161,7 +161,7 @@ const Card = ({ title, image, link, cardBgColor, mainBgColor }: any) => {
   );
 };
 
-export default function Home({ socials: initialSocials }: HomeProps) {
+export default function Home({ social: initialSocial }: HomeProps) {
   const mainBgColor = useColorModeValue(
     "linear(to-br, brand.700, brand.900)",
     "linear(to-br, brand.300, brand.500)"
@@ -189,7 +189,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
     twitch: FaTwitch,
   };
 
-  const socials = initialSocials.map((social) => ({
+  const social = initialSocial.map((social) => ({
     ...social,
     icon: icons[social.name],
   }));
@@ -259,7 +259,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
             <Flex flexDir="column" align="center">
               <Flex h="px" my={2} w="95%" bgColor="brand.200" />
               <Wrap spacing={4} justify="center">
-                {socials.map((social) => {
+                {social.map((social) => {
                   return (
                     <WrapItem key={social.id}>
                       <LinkBox>
@@ -295,7 +295,7 @@ export default function Home({ socials: initialSocials }: HomeProps) {
 }
 
 export async function getStaticProps(ctx: GetStaticProps) {
-  const res = await fetch(`https://leonunesbs.herokuapp.com/homepage`);
+  const res = await fetch(`https://leonunesbs.herokuapp.com/global`);
   const data = await res.json();
 
   if (!data) {
@@ -304,10 +304,10 @@ export async function getStaticProps(ctx: GetStaticProps) {
     };
   }
 
-  const { socials } = data;
+  const { social } = data;
 
   return {
-    props: { socials },
+    props: { social },
     revalidate: 1,
   };
 }
